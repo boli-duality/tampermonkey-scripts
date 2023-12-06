@@ -79,11 +79,10 @@
     let countdown = 10
     appendMessage(countdown + 's')
     const timer = setInterval(() => {
-      appendMessage(--countdown + 's')
-      if (countdown <= 0) {
+      if (--countdown <= 0) {
         getSpecificImg(platform.selector)
         clearInterval(timer)
-      }
+      } else appendMessage(countdown + 's')
     }, 1000)
   }
   previewBtn.onclick = () => appendMessage('正在生成长图，请耐心等待...')
@@ -180,7 +179,6 @@
           new Promise(
             resolve =>
               (e.onload = () => {
-                originLog('图片加载完成:' + ++i, e)
                 appendMessage(`第${++i}张图片加载完成 进度：${++progress}/${total}`)
                 width = Math.max(width, e.naturalWidth)
                 height += e.naturalHeight
